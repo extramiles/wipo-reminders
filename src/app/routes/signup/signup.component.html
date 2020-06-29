@@ -1,1 +1,116 @@
-<p>signup works!</p>
+<div class="card-container">
+    <div class="background-image">
+      <img
+        src="https://www.websitebuilderinsider.com/wp-content/uploads/2017/02/How-to-Build-a-Website-The-Beginner%E2%80%99s-Guide.jpg"
+        alt="backimage">
+    </div>
+    <div class="card card-cert">
+  
+      <div class="card-body">
+  
+        <div id="add-cert">
+  
+          <div class="container">
+            <h3 class="text-center ">Employee Details</h3>
+            <form id="addCert-form" [formGroup]="addCert" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-12 login-row" id="login-row">
+                  <div class="justify-content-center align-items-center">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="empId">Employee Id</label>
+                          <input type="text" name="empId" id="empId" class="form-control" formControlName="employee_id"
+                            placeholder="Enter your employee Id" y>
+                        </div>
+                      </div>
+  
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="empName">Employee Name</label>
+                          <input type="text" name="empName" id="empName" class="form-control" formControlName="name"
+                            placeholder="Enter your employee Name" >
+                        </div>
+                      </div>
+  
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="certCategory">Designation*</label><br>
+                          <select id="certCategory" class="form-control" formControlName="designation">
+                            <option value="">Choose Designation</option>
+                            <option>manager</option>
+                            <option>team member</option>
+                          </select>
+                        </div>
+                      </div>
+  
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="certName">Email</label><br>
+                          <input type="text" name="certName" id="certName" class="form-control"
+                            formControlName="email" placeholder="Enter Email">
+                        </div>
+                      </div>
+  
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="bday">Date of Birth</label><br>
+                          <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+  
+                        </div>
+                      </div>
+  
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="certName">Password</label><br>
+                            <input type="text" name="certName" id="certName" class="form-control"
+                              formControlName="password" placeholder="Enter Password">
+                          </div>
+  
+  
+                      </div>
+                      
+  
+                    </div>
+                    <div class="form-group submit-button">
+                          <input  type="submit" name="submit" class="btn btn-primary btn-md" value="Submit">               
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+  
+  
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+  
+          <h4 class="modal-title">{{imageName}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <img [src]="convertedImage" style="width: 450px; height: 324px;">
+  
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>

@@ -1,13 +1,13 @@
 <div>
     <h2>Dashboard</h2>
-    <div *ngIf="createTeam">
+    <div *ngIf="!team_id && designation=='manager' && createTeam==true">
         <button type="button" class="btn btn-info btn-md" (click)="onCreateTeam()" align="right">
             Create Team
         </button>
     </div>
 
     <div>
-        <div *ngIf="teamCreated">
+        <div *ngIf="team_id && designation=='manager' && addMember==false">
             <button type="button" class="btn btn-info btn-md" (click)="onAddMember()">
                 Add Member
             </button>
@@ -44,6 +44,7 @@
                     <th *ngFor="let col of columns">
                         {{col.header}}
                     </th>
+                    <th style="text-align:center">Add/Remove</th>
                 </tr>
 
             </ng-template>
@@ -51,6 +52,11 @@
                 <tr [pSelectableRow]="rowData">
                     <td *ngFor="let col of columns">
                         {{rowData[col.field]}}
+                    </td>
+                    <td style="text-align:center">
+                        <button type="button" class="btn btn-info" (click)="onAddToTeam(rowData)" align="right">
+                            Add to Team
+                        </button>
                     </td>
                 </tr>
             </ng-template>
@@ -73,7 +79,7 @@
                                         <div class="form-group">
                                             <label for="empId">Team Name</label>
                                             <input type="text" name="empId" id="empId" class="form-control"
-                                                formControlName="employeeId" placeholder="Team name">
+                                                formControlName="team_name" placeholder="Team name">
                                         </div>
                                     </div>
                                 </div>
@@ -82,9 +88,11 @@
                                         <div class="form-group">
                                             <label for="certCategory">Project*</label><br>
                                             <select id="certCategory" class="form-control"
-                                                formControlName="certificationCategory">
+                                                formControlName="project_id">
                                                 <option value="">Choose Project</option>
-                                                <option>Agile</option>
+                                                <option *ngFor="let order of projects; let i = index" [value]="projects[i].id">
+                                                    {{projects[i].project_name}}
+                                                  </option>
                                             </select>
                                         </div>
                                     </div>
@@ -112,7 +120,7 @@
 
 
 
-<div *ngIf="showTeam" class="card card-cert">
+<div *ngIf="team_id && addMember==false" class="card card-cert">
     <!-- <div class="card-header">
         <h2>Certifications Status List</h2>
     </div> -->
@@ -134,6 +142,7 @@
                     <th *ngFor="let col of columns">
                         {{col.header}}
                     </th>
+                    <th style="text-align:center">Payment</th>
                 </tr>
 
             </ng-template>
@@ -141,6 +150,11 @@
                 <tr [pSelectableRow]="rowData">
                     <td *ngFor="let col of columns">
                         {{rowData[col.field]}}
+                    </td>
+                    <td style="text-align:center">
+                        <button type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
+                            Pay
+                        </button>
                     </td>
                 </tr>
             </ng-template>
