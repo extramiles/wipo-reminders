@@ -6,6 +6,65 @@
         </button>
     </div>
 
+    
+
+    <h3 class="first">Default</h3>
+
+    <p-accordion (onOpen)="onTabOpen($event)" >
+        <div >
+        <p-accordionTab *ngFor="let team of teams" >
+            <p-header>
+                   {{team.team_name }}
+            </p-header>
+            <div  class="card card-cert">
+                    <!-- <div class="card-header">
+                        <h2>Certifications Status List</h2>
+                    </div> -->
+                    <div class="card-body">
+                
+                        <p-table #dt [columns]="colsMember" [value]="teamMemberList">
+                            <ng-template pTemplate="caption">
+                                <div style="float: left">
+                                    <h2>My team</h2>
+                                </div>
+                                <div style="text-align: right">
+                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                    <input type="text" pInputText size="50" placeholder="Global Filter" class="global-filter"
+                                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th *ngFor="let col of columns">
+                                        {{col.header}}
+                                    </th>
+                                    <th style="text-align:center">Payment</th>
+                                </tr>
+                
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                <tr [pSelectableRow]="rowData">
+                                    <td *ngFor="let col of columns">
+                                        {{rowData[col.field]}}
+                                    </td>
+                                    <td style="text-align:center">
+                                        <button type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
+                                            Pay
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+        </p-accordionTab>
+    </div>
+    </p-accordion>
+
+
+
+
+
     <div>
         <div *ngIf="team_id && designation=='manager' && addMember==false">
             <button type="button" class="btn btn-info btn-md" (click)="onAddMember()">

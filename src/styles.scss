@@ -1,0 +1,130 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.bg-sopra {
+  background-color: red !important;
+  .navbar-brand {
+    color: #fff !important;
+  }
+  #navbarNavDropdown {
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          color: #fff !important;
+        }
+      }
+    }
+  }
+}
+.card-cert {
+  padding: 20px;
+  border: none;
+  margin-top: 10px;
+  .card-header {
+    background: #fff;
+    text-align: left;
+    padding: 10px 10px;
+    box-shadow: 0 0 10px #666;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+  }
+  .card-body {
+    h2 {
+      font-size: 25px;
+      font-weight: 400;
+    }
+    box-shadow: 0 0 10px #666;
+    border-radius: 5px;
+    border: none !important;
+    padding: 0;
+    .ui-table {
+      .global-filter {
+        width: auto;
+        padding: 8px;
+        border-radius: 20px;
+        border: 2px solid #ddd;
+        -webkit-clip-path: inset(0 0 0 0 round 100px);
+      }
+      .ui-table-caption {
+        background: #fff;
+      }
+      .filter-txts {
+        input[type="text"] {
+          padding: 6px;
+          width: 100%;
+          border-radius: 20px;
+          border: 1px solid #aaa;
+          -webkit-clip-path: inset(0 0 0 0 round 100px);
+        }
+      }
+      .ui-table-thead {
+        tr {
+          &:nth-child(2) {
+            th {
+              background: #fff;
+              padding: 10px 5px;
+            }
+          }
+          &:nth-child(1) {
+            th {
+              background: #f0f0f0;
+            }
+          }
+        }
+      }
+      .ui-table-tbody {
+        tr {
+          &:hover {
+            background: #a3dffb2e;
+          }
+          td {
+            padding: 5px;
+          }
+        }
+        tr:nth-child(even) {
+          background: #fff;
+          &:hover {
+            background: #a3dffb2e;
+          }
+        }
+      }
+    }
+  }
+}
+
+.font-awesome-icon-default {
+  font-size: 25px;
+  cursor: pointer;
+}
+.font-awesome-icon-delete {
+  font-size: 25px;
+  color: red;
+  top: -2px;
+  position: relative;
+  cursor: pointer;
+}
+.font-awesome-icon-right-padding {
+  margin-right: 20px;
+}
+body .ui-button{
+  background-color: #00d9b1;
+  border: 1px solid #00d9b1;
+}
+//calender width adjustment
+.ui-calendar {
+  width:100%;
+.ui-inputtext{
+  width: 91.8%;
+}
+}
+body .ui-button.ui-button-icon-only .ui-button-text {
+  padding: 0.539em;
+}

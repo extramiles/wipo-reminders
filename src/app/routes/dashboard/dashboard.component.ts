@@ -14,13 +14,31 @@ export class DashboardComponent implements OnInit {
   designation= `${environment.designation}`;
   team_id  = Number(`${environment.team_id}`);
 
+  teamMemberList=[{
+    "employee_id": 693313,
+    "name": "Amit Bhandari",
+    "dob": "2020-06-08",
+    "email": "amit777bhandari@gmail.com",
+    "team_id": 33,
+    "balance": 0,
+    "password": "1234",
+    "designation": "manager"
+}];
+
+  teams =[{
+    "team_id": 33,"team_name": "Amit","project_id": "1",'employee_id': 693313},
+    {  "team_id": 36,  "team_name": "Bhandari",  "project_id": "1"}];
+
+    
+
   addTeam: FormGroup;
   public createTeam = true;
   public createForm = false;
   teamCreated =false;
   addMember =false;
   showTeam= false
-  teamMemberList: [];
+  
+
   employeeList: [];
   projects: [];
   data:any;
@@ -46,10 +64,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.appService.getMyTeam(this.team_id).subscribe(res => {
-      console.log('teamMemberList RESPONSE >>>>>', res);
-      this.teamMemberList = res;
-    });
+    // this.appService.getMyTeam(this.team_id).subscribe(res => {
+    //   console.log('teamMemberList RESPONSE >>>>>', res);
+    //   this.teamMemberList = res;
+    // });
 
     this.addTeam = new FormGroup({
       team_name: new FormControl('', []),
@@ -135,4 +153,13 @@ onAddToTeam(data){
     
   });
 }
+
+onTabOpen(event) {
+  console.log("clicked>>>>>>>>>>>>>>>>>>"+this.teams[event.index].team_id);
+  this.appService.getMyTeam(this.teams[event.index].team_id).subscribe(res => {
+      console.log('teamMemberList RESPONSE >>>>>', res);
+      this.teamMemberList = res;
+     });
+}
+
 }
