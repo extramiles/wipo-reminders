@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   token: "",
-  employee_id: "",
-  designation: "",
+  employee_id: "693313",
+  designation: "manager",
+  role:"",
   team_id : ""
 };
 

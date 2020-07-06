@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
 
   employee_id= Number(`${environment.employee_id}`);
   designation= `${environment.designation}`;
+  role= `${environment.role}`;
   team_id  = Number(`${environment.team_id}`);
 
   teamMemberList=[{
@@ -30,13 +31,13 @@ export class DashboardComponent implements OnInit {
     {  "team_id": 36,  "team_name": "Bhandari",  "project_id": "1"}];
 
     
-
+ pay=true;
   addTeam: FormGroup;
   public createTeam = true;
   public createForm = false;
   teamCreated =false;
   addMember =false;
-  showTeam= false
+  showTeam= true
   
 
   employeeList: [];
@@ -47,27 +48,26 @@ export class DashboardComponent implements OnInit {
   colsEmployee = [
     { field: 'employee_id', header: 'Employee ID' },
     { field: 'name', header: 'Employee Name' },
-    { field: 'dob', header: 'DOB' },
-    { field: 'project', header: 'Add/Remove' },
+    { field: 'dob', header: 'DOB' }
     ]
 
     colsMember = [
       { field: 'employee_id', header: 'Employee ID' },
       { field: 'name', header: 'Employee Name' },
       { field: 'dob', header: 'DOB' },
-      { field: 'anniversary_date', header: 'Anniversity' },
-      { field: 'balance', header: 'Balance' },
-      { field: 'role', header: 'Role'}
+      { field: 'role', header: 'Role'},
+      { field: 'balance', header: 'Balance' }
+      
       ]
 
   constructor(private appService: AppService) { }
 
   ngOnInit() {
 
-    // this.appService.getMyTeam(this.team_id).subscribe(res => {
-    //   console.log('teamMemberList RESPONSE >>>>>', res);
-    //   this.teamMemberList = res;
-    // });
+     this.appService.getMyTeam(this.team_id).subscribe(res => {
+       console.log('teamMemberList RESPONSE >>>>>', res);
+      this.teamMemberList = res;
+     });
 
     this.addTeam = new FormGroup({
       team_name: new FormControl('', []),

@@ -1,18 +1,69 @@
 <div>
-    <h2>Dashboard</h2>
-    <div *ngIf="!team_id && designation=='manager' && createTeam==true">
-        <button type="button" class="btn btn-info btn-md" (click)="onCreateTeam()" align="right">
-            Create Team
-        </button>
-    </div>
-
     
+    <div class="card ">
+             <div class="card-header">
+                    <h2>Dashboard</h2>
+                </div> 
+            <div *ngIf="designation" class="card-body">
+             <button type="button" class="btn btn-info btn-md" (click)="onCreateTeam()" align="right">
+                  Create Team
+             </button>
+             
+             <button type="button" class="btn btn-info btn-md"  align="right">
+                Create Survey
+             </button>
+            </div>
+   </div>
 
-    <h3 class="first">Default</h3>
+    <div *ngIf="createForm" class="card card-cert">
+            <div class="card-body">
+                <div id="add-cert">
+                    <div class="container">
+                        <h3 class="text-center ">Create Team</h3>
+                        <form id="addCert-form" [formGroup]="addTeam" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-12 login-row" id="login-row">
+                                    <div class="justify-content-center align-items-center">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="empId">Team Name</label>
+                                                    <input type="text" name="empId" id="empId" class="form-control"
+                                                        formControlName="team_name" placeholder="Team name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="certCategory">Project*</label><br>
+                                                    <select id="certCategory" class="form-control"
+                                                        formControlName="project_id">
+                                                        <option value="">Choose Project</option>
+                                                        <option *ngFor="let order of projects; let i = index" [value]="projects[i].id">
+                                                            {{projects[i].project_name}}
+                                                          </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group submit-button">
+        
+                                        <input type="submit" name="submit" class="btn btn-primary btn-md" value="Create">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>   
 
-    <p-accordion (onOpen)="onTabOpen($event)" >
+
+    <p-accordion (onOpen)="onTabOpen($event)">
         <div >
-        <p-accordionTab *ngFor="let team of teams" >
+        <p-accordionTab *ngFor="let team of teams">
             <p-header>
                    {{team.team_name }}
             </p-header>
@@ -20,12 +71,22 @@
                     <!-- <div class="card-header">
                         <h2>Certifications Status List</h2>
                     </div> -->
+                      <div *ngIf="showTeam && designation">
+                    <button type="button" class="btn btn-info" (click)="onAddMember()">
+                            Add Member
+                        </button> 
+                    </div>
+                    <div *ngIf="addMember && designation">
+                            <button type="button" class="btn btn-info btn-md" (click)="onMyTeam()">
+                                My Team
+                            </button>
+                        </div>
                     <div class="card-body">
                 
-                        <p-table #dt [columns]="colsMember" [value]="teamMemberList">
+                        <p-table *ngIf="showTeam" #dt [columns]="colsMember" [value]="teamMemberList">
                             <ng-template pTemplate="caption">
                                 <div style="float: left">
-                                    <h2>My team</h2>
+                                     <h4>Team Fund:300</h4>
                                 </div>
                                 <div style="text-align: right">
                                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -38,7 +99,7 @@
                                     <th *ngFor="let col of columns">
                                         {{col.header}}
                                     </th>
-                                    <th style="text-align:center">Payment</th>
+                                    <th *ngIf="!designation" style="text-align:center">Payment</th>
                                 </tr>
                 
                             </ng-template>
@@ -47,14 +108,58 @@
                                     <td *ngFor="let col of columns">
                                         {{rowData[col.field]}}
                                     </td>
-                                    <td style="text-align:center">
-                                        <button type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
-                                            Pay
+                                    <td *ngIf="role" style="text-align:center">
+                                        <button *ngIf="rowData.employee_id ==employee_id && rowData.balance > 0" type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
+                                               Pay 
+                                        </button>
+                                        
+                                        <button *ngIf="rowData.payment_status ==1" type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
+                                                Approve
                                         </button>
                                     </td>
+                                    <td *ngIf="!role && !designation" style="text-align:center">
+                                            <button *ngIf="rowData.employee_id ==employee_id && rowData.balance > 0" type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
+                                                   Pay 
+                                            </button>
+                                            <p *ngIf="rowData.payment_status ==1">Pending</p>
+                                        </td>
                                 </tr>
                             </ng-template>
                         </p-table>
+                        <p-table *ngIf="addMember" #dt [columns]="colsEmployee" [value]="employeeList">
+                                <ng-template pTemplate="caption">
+                                    <div style="float: left">
+                                        <h2>Add Member</h2>
+                                        
+                                    </div>
+                                    <div style="text-align: right">
+                                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                        <input type="text" pInputText size="50" placeholder="Global Filter" class="global-filter"
+                                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                        <th style="text-align:center">Add/Remove</th>
+                                    </tr>
+                    
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [pSelectableRow]="rowData">
+                                        <td *ngFor="let col of columns">
+                                            {{rowData[col.field]}}
+                                        </td>
+                                        <td style="text-align:center">
+                                            <button type="button" class="btn btn-info" (click)="onAddToTeam(rowData)" align="right">
+                                                Add to Team
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
                     </div>
                 </div>
         </p-accordionTab>
@@ -65,109 +170,7 @@
 
 
 
-    <div>
-        <div *ngIf="team_id && designation=='manager' && addMember==false">
-            <button type="button" class="btn btn-info btn-md" (click)="onAddMember()">
-                Add Member
-            </button>
-        </div>
-    </div>
-
-    <div *ngIf="addMember">
-        <button type="button" class="btn btn-info btn-md" (click)="onMyTeam()">
-            My Team
-        </button>
-    </div>
-</div>
-
-
-<div *ngIf="addMember" class="card card-cert">
-    <!-- <div class="card-header">
-            <h2>Certifications Status List</h2>
-        </div> -->
-    <div class="card-body">
-
-        <p-table #dt [columns]="colsEmployee" [value]="employeeList">
-            <ng-template pTemplate="caption">
-                <div style="float: left">
-                    <h2>Add Member</h2>
-                </div>
-                <div style="text-align: right">
-                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input type="text" pInputText size="50" placeholder="Global Filter" class="global-filter"
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        {{col.header}}
-                    </th>
-                    <th style="text-align:center">Add/Remove</th>
-                </tr>
-
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr [pSelectableRow]="rowData">
-                    <td *ngFor="let col of columns">
-                        {{rowData[col.field]}}
-                    </td>
-                    <td style="text-align:center">
-                        <button type="button" class="btn btn-info" (click)="onAddToTeam(rowData)" align="right">
-                            Add to Team
-                        </button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</div>
-
-
-<div *ngIf="createForm" class="card card-cert">
-    <div class="card-body">
-        <div id="add-cert">
-            <div class="container">
-                <h3 class="text-center ">Create Team</h3>
-                <form id="addCert-form" [formGroup]="addTeam" (ngSubmit)="onSubmit()">
-                    <div class="row">
-                        <div class="col-md-12 login-row" id="login-row">
-                            <div class="justify-content-center align-items-center">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="empId">Team Name</label>
-                                            <input type="text" name="empId" id="empId" class="form-control"
-                                                formControlName="team_name" placeholder="Team name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="certCategory">Project*</label><br>
-                                            <select id="certCategory" class="form-control"
-                                                formControlName="project_id">
-                                                <option value="">Choose Project</option>
-                                                <option *ngFor="let order of projects; let i = index" [value]="projects[i].id">
-                                                    {{projects[i].project_name}}
-                                                  </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group submit-button">
-
-                                <input type="submit" name="submit" class="btn btn-primary btn-md" value="Create">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+    
 
 
 
@@ -179,44 +182,8 @@
 
 
 
-<div *ngIf="team_id && addMember==false" class="card card-cert">
-    <!-- <div class="card-header">
-        <h2>Certifications Status List</h2>
-    </div> -->
-    <div class="card-body">
 
-        <p-table #dt [columns]="colsMember" [value]="teamMemberList">
-            <ng-template pTemplate="caption">
-                <div style="float: left">
-                    <h2>My team</h2>
-                </div>
-                <div style="text-align: right">
-                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input type="text" pInputText size="50" placeholder="Global Filter" class="global-filter"
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        {{col.header}}
-                    </th>
-                    <th style="text-align:center">Payment</th>
-                </tr>
 
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr [pSelectableRow]="rowData">
-                    <td *ngFor="let col of columns">
-                        {{rowData[col.field]}}
-                    </td>
-                    <td style="text-align:center">
-                        <button type="button" class="btn btn-info" (click)="onPay(rowData)" align="right">
-                            Pay
-                        </button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</div>
+
+
+
