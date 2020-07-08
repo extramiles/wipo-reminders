@@ -1,116 +1,158 @@
-<div class="card-container">
-    <div class="background-image">
-      <img
-        src="https://www.websitebuilderinsider.com/wp-content/uploads/2017/02/How-to-Build-a-Website-The-Beginner%E2%80%99s-Guide.jpg"
-        alt="backimage">
-    </div>
-    <div class="card card-cert">
+
+<div class="main">
+    
+    <div class="container">
   
-      <div class="card-body">
-  
-        <div id="add-cert">
-  
-          <div class="container">
-            <h3 class="text-center ">Employee Details</h3>
-            <form id="addCert-form" [formGroup]="addCert" (ngSubmit)="onSubmit()">
-              <div class="row">
-                <div class="col-md-12 login-row" id="login-row">
-                  <div class="justify-content-center align-items-center">
-                    <div class="row">
-                      <div class="col-md-6">
+      <div class="signup-area">
+          
+          <div class="row">
+
+            <div class="col-md-6 col-xs-12">
+                  
+              <div class= "form-section" id="add-cert">
+            
+                <h2 class="form-title">Sign up</h2>
+            
+                  <form class="signup-form" id="addCert-form" [formGroup]="addCert" (ngSubmit)="onSubmit()">
+              
                         <div class="form-group">
-                          <label for="empId">Employee Id</label>
+                          <input type="text" spellcheck="false" name="empName" id="empName" class="form-control" formControlName="name"
+                            placeholder="Your Name" >
+
+                            <span *ngIf="addCert.get('name').errors?.required && (addCert.get('name').touched || submitted)" class= "form-text text-muted"> 
+                              Please enter your Name!
+                            </span> 
+                            <span *ngIf="addCert.get('name').errors?.pattern && addCert.get('name').touched" class= "form-text text-muted"> 
+                              Please enter a valid name!
+                            </span>
+                        </div>
+
+
+                        <div class="form-group">
                           <input type="text" name="empId" id="empId" class="form-control" formControlName="employee_id"
-                            placeholder="Enter your employee Id" y>
+                            placeholder="Your Employee Id" y>
+                            <span *ngIf="!addCert.get('employee_id').valid && (addCert.get('employee_id').touched || submitted)" class= "form-text text-muted"> 
+                              Please enter your Employee Id!
+                            </span>
                         </div>
-                      </div>
-  
-                      <div class="col-md-6">
+                       
+                        
                         <div class="form-group">
-                          <label for="empName">Employee Name</label>
-                          <input type="text" name="empName" id="empName" class="form-control" formControlName="name"
-                            placeholder="Enter your employee Name" >
+                          <input type="text" spellcheck="false" name="certName" id="certName" class="form-control"
+                            formControlName="email" placeholder=" Your Email address">
+
+                            <span *ngIf="addCert.get('email').errors?.required && (addCert.get('email').touched || submitted)" class= "form-text text-muted"> 
+                              Please enter your email address!
+                            </span> 
+                            <span *ngIf="addCert.get('email').errors?.email && addCert.get('email').touched" class= "form-text text-muted"> 
+                              Please enter a valid email address!
+                            </span>
                         </div>
-                      </div>
-  
-                    </div>
-  
-                    <div class="row">
-                      <div class="col-md-6">
+                     
+                        
                         <div class="form-group">
-                          <label for="certCategory">Designation*</label><br>
                           <select id="certCategory" class="form-control" formControlName="designation">
-                            <option value="">Choose Designation</option>
+                            <option value="">Choose your Designation</option>
                             <option>manager</option>
                             <option>team member</option>
                           </select>
+                          <span *ngIf="!addCert.get('designation').valid && (addCert.get('designation').touched || submitted)" class= "form-text text-muted"> 
+                            Please select your designation!
+                          </span>
                         </div>
-                      </div>
+
   
-                      <div class="col-md-6">
                         <div class="form-group">
-                          <label for="certName">Email</label><br>
-                          <input type="text" name="certName" id="certName" class="form-control"
-                            formControlName="email" placeholder="Enter Email">
+                          <p-calendar formControlName="dob" [showIcon]="true" [maxDate]="dateToday"></p-calendar>
+                          <span *ngIf="!addCert.get('dob').valid && (addCert.get('dob').touched || submitted)" class= "form-text text-muted"> 
+                            Please enter your Date Of Birth!
+                          </span>
                         </div>
-                      </div>
-  
-                    </div>
-  
-                    <div class="row">
-                      <div class="col-md-6">
+                        
+                        
                         <div class="form-group">
-                          <label for="bday">Date of Birth</label><br>
-                          <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
-  
-                        </div>
-                      </div>
-  
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="certName">Password</label><br>
-                            <input type="text" name="certName" id="certName" class="form-control"
+                            <input type="password" name="password" id="certName" class="form-control"
                               formControlName="password" placeholder="Enter Password">
-                          </div>
+
+                            <span *ngIf="addCert.get('password').errors?.required && (addCert.get('password').touched || submitted)" class= "form-text text-muted"> 
+                              Password field cannot be empty!
+                            </span>
+                            <span *ngIf="addCert.get('password').errors?.minlength && addCert.get('password').touched" class= "form-text text-muted"> 
+                              Password must be 8 characters long!
+                            </span>
+                            <span *ngIf="addCert.get('password').errors?.maxlength && addCert.get('password').touched" class= "form-text text-muted"> 
+                              Password length should be between 8-12 characters!
+                            </span>
+
+                        </div>
   
-  
-                      </div>
-                      
-  
-                    </div>
-                    <div class="form-group submit-button">
-                          <input  type="submit" name="submit" class="btn btn-primary btn-md" value="Submit">               
-                    </div>
-                  </div>
+                        <!-- <span *ngIf="!addCert.valid && submitted" class= "form-text text-muted"> 
+                          Fill all the fields with correct data.
+                        </span> -->
+                          
+                        <div class="form-group form-button">
+                          <input  type="submit" name="submit" class="form-submit" value="Submit">               
+                        </div>
+                  
+                  </form>
+
+              </div>  
+
+            </div>
+      
+            <div class="col-md-6 col-xs-12">
+        
+              <div class= "image-section" id="add-cert">
+          
+                <img class= "img-fluid image" src="../../../assets/image/signup.jpg" alt="sign-up-image">
+                  
+                <div class= "login-page-link">
+                  <span>Already have an Account? </span>
+                  <a [routerLink]="['/login']">Login here</a>
                 </div>
+          
               </div>
-            </form>
-  
-  
-  
+
+            </div>
+          
           </div>
-        </div>
+        
       </div>
+ 
     </div>
-  </div>
+
+    <button class="btn btn-primary" (click)="openDialog()">click</button>
+</div>
+
+
+   
+  <!-- <button class="btn btn-primary" data-toggle="modal"  data-target="#myModal" (click)="showModal= true">click</button> -->
   
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+  <!-- <div [ngClass]= "{'show': showModal}" class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog"> -->
   
-      <!-- Modal content-->
-      <div class="modal-content">
+      
+      <!-- <div class="modal-content">
         <div class="modal-header">
   
-          <h4 class="modal-title">{{imageName}}</h4>
+          <h4 class="modal-title"></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <img [src]="convertedImage" style="width: 450px; height: 324px;">
-  
-  
+          <p>You have successfully signed-in! Please Login to Contniue.</p>
         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal= false">Close</button>
+            <button type="button" class="btn btn-primary" (click)="OnClick()">Login</button>
+          </div>
+  
+  
+       
   
       </div>
   
     </div>
-  </div>
+  </div>  -->
+
+

@@ -1,51 +1,138 @@
 
-.card-container{
-    .background-image{
-      position: absolute;
-      height: 100%;
-      width:100%;
-      top:0;
-      z-index: -1;
-      >img{
-        height: 100%;
-        width:100%;
-        object-fit: cover;
-        opacity: 0.2;
-      }
-    }
-  .card{
-    background-color: #fff0;
-    &-body{
-      background-color: #FFF;
-      min-height: calc(100vh - 350px);
-      width:75%;
-      margin-left: auto;
-      margin-right: auto;
+
+// .card-container{
+//   padding: 150px 0;
+//   border-width: 0px;
+//   background-color: #f8f8f8;
   
-      .login-row{
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
+//   .inner-container{
+//     margin-bottom:150px; 
+//   }
+    
+//   .card{
+//     // background-color: #fff0;
+//     &-body{
+//       background-color: #FFF;
+//       min-height: calc(100vh - 350px);
+//       width:75%;
+//       margin-left: auto;
+//       margin-right: auto;
+  
+//       .login-row{
+//         margin-left: auto;
+//         margin-right: auto;
+//       }
+//     }
   
     
-    .submit-button{
-      text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
+//     .submit-button{
+//       text-align: center;
+//       margin-top: 20px;
+//       margin-bottom: 20px;
+//     }
+//   }
+//   }
+
+
+.main{
+  padding: 120px 0;
+  background-color: #f8f8f8;
+
+  .container{
+    width:800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 20px;
   }
+
+  .signup-area{
+    padding: 75px 0;
   }
+
+  .form-section{
+    margin-left: 75px;
+    margin-right: 10px;
+    padding-left: 34px;
+  }
+
+  .signup-form{
+    width:100%;
+  }
+
+  .image-section{
+    margin:20px 109px 0px 10px;
   
-  h3{
-      margin-top: 20px;
-      margin-bottom: 20px;
   }
-  .col-md-6{
-    padding: 15px;
-  }
+
+  h2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.col-md-6{
+  padding: 15px;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #999;
+  border-radius: 0rem;
+}
+
+input.ng-touched.ng-invalid{
+  border-bottom: 1px solid red;
+
+}
+
+.form-submit{
+  display: inline-block;
+background: #6dabe4;
+color: #fff;
+border-bottom: none;
+width: auto;
+padding: 15px 39px;
+cursor: pointer; 
+}
+
+.form-submit:hover {
+background: #4292dc; 
+
+}
+
+.login-page-link {
+font-size: 14px;
+color: #222;
+display: block;
+text-align: center; 
+margin-top: 50px;
+}
+
+.modal.show{
+display: block;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// .image{
+//   opacity: 0.75;
+// }
+ 
+
   
-  .xx{
-    margin-right: 40px;
-    width: 100px;
-    background-color: #ef9c9c}
+  
