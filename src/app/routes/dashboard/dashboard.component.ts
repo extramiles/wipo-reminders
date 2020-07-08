@@ -12,15 +12,35 @@ export class DashboardComponent implements OnInit {
 
   employee_id= Number(`${environment.employee_id}`);
   designation= `${environment.designation}`;
+  role= `${environment.role}`;
   team_id  = Number(`${environment.team_id}`);
+  index=0;
 
+  teamMemberList=[{
+    "employee_id": 693313,
+    "name": "Amit Bhandari",
+    "dob": "2020-06-08",
+    "email": "amit777bhandari@gmail.com",
+    "team_id": 33,
+    "balance": 0,
+    "password": "1234",
+    "designation": "manager"
+}];
+
+  teams =[{
+    "team_id": 33,"team_name": "Amit","project_id": "1",'employee_id': 693313},
+    {  "team_id": 36,  "team_name": "Bhandari",  "project_id": "1"}];
+
+    
+  pay=true;
   addTeam: FormGroup;
   public createTeam = true;
   public createForm = false;
   teamCreated =false;
   addMember =false;
-  showTeam= false
-  teamMemberList: [];
+  showTeam= true
+  
+
   employeeList: [];
   projects: [];
   data:any;
@@ -29,27 +49,32 @@ export class DashboardComponent implements OnInit {
   colsEmployee = [
     { field: 'employee_id', header: 'Employee ID' },
     { field: 'name', header: 'Employee Name' },
-    { field: 'dob', header: 'DOB' },
-    { field: 'project', header: 'Add/Remove' },
+    { field: 'dob', header: 'DOB' }
     ]
 
     colsMember = [
       { field: 'employee_id', header: 'Employee ID' },
       { field: 'name', header: 'Employee Name' },
       { field: 'dob', header: 'DOB' },
-      { field: 'anniversary_date', header: 'Anniversity' },
-      { field: 'balance', header: 'Balance' },
-      { field: 'role', header: 'Role'}
+      { field: 'role', header: 'Role'},
+      { field: 'balance', header: 'Balance' }
+      
       ]
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService,private router: Router) { }
 
   ngOnInit() {
 
-    this.appService.getMyTeam(this.team_id).subscribe(res => {
+    if(this.team_id){
+      this.appService.getMyTeam(this.team_id).subscribe(res => {
       console.log('teamMemberList RESPONSE >>>>>', res);
-      this.teamMemberList = res;
+     this.teamMemberList = res;
     });
+    }
+    if(this.designation){
+      
+    }
+     
 
     this.addTeam = new FormGroup({
       team_name: new FormControl('', []),
@@ -135,4 +160,17 @@ onAddToTeam(data){
     
   });
 }
+
+onTabOpen(event) {
+  console.log("clicked>>>>>>>>>>>>>>>>>>"+this.teams[event.index].team_id);
+  this.appService.getMyTeam(this.teams[event.index].team_id).subscribe(res => {
+      console.log('teamMemberList RESPONSE >>>>>', res);
+      this.teamMemberList = res;
+     });
+}
+
+onCreateSurvey(){
+  this.router.navigate(['create-survey']);
+}
+
 }
