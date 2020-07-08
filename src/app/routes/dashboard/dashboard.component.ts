@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   designation= `${environment.designation}`;
   role= `${environment.role}`;
   team_id  = Number(`${environment.team_id}`);
+  index=0;
 
   teamMemberList=[{
     "employee_id": 693313,
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit {
     {  "team_id": 36,  "team_name": "Bhandari",  "project_id": "1"}];
 
     
- pay=true;
+  pay=true;
   addTeam: FormGroup;
   public createTeam = true;
   public createForm = false;
@@ -60,14 +61,20 @@ export class DashboardComponent implements OnInit {
       
       ]
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService,private router: Router) { }
 
   ngOnInit() {
 
-     this.appService.getMyTeam(this.team_id).subscribe(res => {
-       console.log('teamMemberList RESPONSE >>>>>', res);
-      this.teamMemberList = res;
-     });
+    if(this.team_id){
+      this.appService.getMyTeam(this.team_id).subscribe(res => {
+      console.log('teamMemberList RESPONSE >>>>>', res);
+     this.teamMemberList = res;
+    });
+    }
+    if(this.designation){
+      
+    }
+     
 
     this.addTeam = new FormGroup({
       team_name: new FormControl('', []),
@@ -160,6 +167,10 @@ onTabOpen(event) {
       console.log('teamMemberList RESPONSE >>>>>', res);
       this.teamMemberList = res;
      });
+}
+
+onCreateSurvey(){
+  this.router.navigate(['create-survey']);
 }
 
 }

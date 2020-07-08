@@ -9,7 +9,7 @@
                   Create Team
              </button>
              
-             <button type="button" class="btn btn-info btn-md"  align="right">
+             <button type="button" class="btn btn-info btn-md"  align="right" (click)="onCreateSurvey()">
                 Create Survey
              </button>
             </div>
@@ -61,9 +61,9 @@
         </div>   
 
 
-    <p-accordion (onOpen)="onTabOpen($event)">
+    <p-accordion (onOpen)="onTabOpen($event)" [activeIndex]="index" >
         <div >
-        <p-accordionTab *ngFor="let team of teams">
+        <p-accordionTab *ngFor="let team of teams" [selected]="activeIndex==null">
             <p-header>
                    {{team.team_name }}
             </p-header>
