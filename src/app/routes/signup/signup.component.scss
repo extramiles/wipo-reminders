@@ -1,48 +1,18 @@
 
-
-// .card-container{
-//   padding: 150px 0;
-//   border-width: 0px;
-//   background-color: #f8f8f8;
-  
-//   .inner-container{
-//     margin-bottom:150px; 
-//   }
-    
-//   .card{
-//     // background-color: #fff0;
-//     &-body{
-//       background-color: #FFF;
-//       min-height: calc(100vh - 350px);
-//       width:75%;
-//       margin-left: auto;
-//       margin-right: auto;
-  
-//       .login-row{
-//         margin-left: auto;
-//         margin-right: auto;
-//       }
-//     }
-  
-    
-//     .submit-button{
-//       text-align: center;
-//       margin-top: 20px;
-//       margin-bottom: 20px;
-//     }
-//   }
-//   }
-
-
 .main{
-  padding: 120px 0;
+  background-image: url('../../../assets/image/signup-bg.jpg');
   background-color: #f8f8f8;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  padding: 120px 0;
 
   .container{
     width:800px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 20px;
+    align-content: center;
   }
 
   .signup-area{
@@ -51,31 +21,25 @@
 
   .form-section{
     margin-left: 75px;
-    margin-right: 10px;
-    padding-left: 34px;
+    margin-right: 75px;
   }
 
   .signup-form{
     width:100%;
   }
 
-  .image-section{
-    margin:20px 109px 0px 10px;
-  
-  }
-
-  h2{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 36px;
-}
-
 .col-md-6{
   padding: 15px;
 }
 
-input {
+h2{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+input, select {
   border: 0;
   outline: 0;
   background: transparent;
@@ -83,13 +47,13 @@ input {
   border-radius: 0rem;
 }
 
-input.ng-touched.ng-invalid{
+input.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
   border-bottom: 1px solid red;
 
 }
 
 .form-submit{
-  display: inline-block;
+display: inline-block;
 background: #6dabe4;
 color: #fff;
 border-bottom: none;
@@ -100,38 +64,28 @@ cursor: pointer;
 
 .form-submit:hover {
 background: #4292dc; 
-
 }
 
 .login-page-link {
-font-size: 14px;
-color: #222;
-display: block;
-text-align: center; 
-margin-top: 50px;
+  font-size: 14px;
+  color: #222;
+  display: block;
+  text-align: center; 
+  margin-top: 50px;
+  }
+
+.ui-calendar{
+  width:100%;
+  ui-inputtext{
+    width: 100%;
+  }
+  .ui-button{
+    background-color: #4292dc !important;
+  }
 }
 
-.modal.show{
-display: block;
 }
 
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-// .image{
-//   opacity: 0.75;
-// }
  
 
   

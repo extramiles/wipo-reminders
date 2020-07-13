@@ -7,7 +7,7 @@
           
           <div class="row">
 
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-12 col-xs-12">
                   
               <div class= "form-section" id="add-cert">
             
@@ -85,10 +85,6 @@
                             </span>
 
                         </div>
-  
-                        <!-- <span *ngIf="!addCert.valid && submitted" class= "form-text text-muted"> 
-                          Fill all the fields with correct data.
-                        </span> -->
                           
                         <div class="form-group form-button">
                           <input  type="submit" name="submit" class="form-submit" value="Submit">               
@@ -96,22 +92,12 @@
                   
                   </form>
 
-              </div>  
+                  <div class= "login-page-link">
+                    <span>Already have an Account? </span>
+                    <a [routerLink]="['/login']">Login here</a>
+                  </div>
 
-            </div>
-      
-            <div class="col-md-6 col-xs-12">
-        
-              <div class= "image-section" id="add-cert">
-          
-                <img class= "img-fluid image" src="../../../assets/image/signup.jpg" alt="sign-up-image">
-                  
-                <div class= "login-page-link">
-                  <span>Already have an Account? </span>
-                  <a [routerLink]="['/login']">Login here</a>
-                </div>
-          
-              </div>
+              </div>  
 
             </div>
           
@@ -121,38 +107,8 @@
  
     </div>
 
-    <button class="btn btn-primary" (click)="openDialog()">click</button>
+    <!-- <button class="btn btn-primary" (click)="openDialog()">click</button> -->
 </div>
 
-
-   
-  <!-- <button class="btn btn-primary" data-toggle="modal"  data-target="#myModal" (click)="showModal= true">click</button> -->
-  
-  <!-- <div [ngClass]= "{'show': showModal}" class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog"> -->
-  
-      
-      <!-- <div class="modal-content">
-        <div class="modal-header">
-  
-          <h4 class="modal-title"></h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <img [src]="convertedImage" style="width: 450px; height: 324px;">
-          <p>You have successfully signed-in! Please Login to Contniue.</p>
-        </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal= false">Close</button>
-            <button type="button" class="btn btn-primary" (click)="OnClick()">Login</button>
-          </div>
-  
-  
-       
-  
-      </div>
-  
-    </div>
-  </div>  -->
 
 

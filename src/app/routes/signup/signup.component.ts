@@ -30,9 +30,9 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger
     console.log(this.addCert);
     console.log(this.addCert.value);
+    debugger
     if(this.addCert.valid){
       this.appService.employeeSignup(this.addCert.value).subscribe(res => {
         console.log('signup RESPONSE >>>>>', res);
